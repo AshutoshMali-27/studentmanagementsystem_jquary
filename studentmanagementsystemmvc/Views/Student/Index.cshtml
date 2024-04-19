@@ -2,37 +2,10 @@
 @{
     ViewData["Index"] = "index page";
 }
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script>
 
-    $(document).ready(function (){
-        $(function () {
-            $('#btnsave').click(function (event) {
 
-                event.preventDefault();
-                var Student = {
-                    Name: $('#txtcode').val(),
-                    Gender: $('#txtgender').val(),
-                    Age: $('#txtage').val()
-                }
+<script src="~/lib/jquery/dist/jquery-3.4.1.min.js"></script>
 
-                $.ajax({
-                    type:'POST',
-                    url:'/Student/Index',
-                    data:JSON.stringify(Student),
-                    contentType:'application/json;charset-utf-8',
-                    success: function (response) {
-                        alert('SuccessFully Added')
-                    },
-                    error: function (response) {
-                        alert('there is some proble to add data');
-                    }
-                })
-            });
-        })
-    })
-
-</script>
 
 <h1> Create </h1>
 
@@ -44,4 +17,42 @@ Age:
 <input type="text" id="txtage" class="form-control" />
 <br />
 <br />
-<input type="button" class="btn btn-info" name="btnsave" value="submit" />
+
+<input type="button" id="btnSave" value="Save" />
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(function () {
+            debugger;
+            $('#btnsave').click(function (event) {
+                debugger;
+                event.preventDefault();
+                var Student = {
+                    Name: $('#txtcode').val(),
+                    Gender: $('#txtgender').val(),
+                    Age: $('#txtage').val()
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Student/Index',
+                    data: JSON.stringify(Student),
+                    contentType: 'application/json;charset-utf-8',
+                    success: function (response) {
+                        alert('SuccessFully Added');
+                    },
+                    error: function (response) {
+                        alert('there is some proble to add data');
+                    }
+                })
+            });
+        })
+    })
+
+</script>
+
+

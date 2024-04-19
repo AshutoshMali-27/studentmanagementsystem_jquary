@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using studentmanagementsystemmvc.Models;
+using System.Text;
+//using System.Web.Mvc;
 
 namespace studentmanagementsystemmvc.Controllers
 {
@@ -17,10 +20,25 @@ namespace studentmanagementsystemmvc.Controllers
         [HttpPost]
         public IActionResult Index(ClsStudent objstudent)
         {
-            ClsStudent obj=new ClsStudent();
-            //obj
+            ClsStudent obj = new ClsStudent();
+            obj.Name = objstudent.Name;
+            obj.Gender = objstudent.Gender;
+            obj.Age = objstudent.Age;
+          
 
-            return Json("");
+            url = url + "SetAllStudent";
+            string data = JsonConvert.SerializeObject(obj);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["Insert_message"] = "Student Added";
+                return RedirectToAction("Index");
+            }
+            ModelState.Clear();
+
+            return Json(new { successMessage = "Data successfully added." }, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+          
         }
     }
 }
