@@ -1,4 +1,5 @@
-﻿namespace studentmanagementsystemmvc.Models
+﻿using System.Web.Mvc;
+namespace studentmanagementsystemmvc.Models
 {
     public class ClsStudent
     {

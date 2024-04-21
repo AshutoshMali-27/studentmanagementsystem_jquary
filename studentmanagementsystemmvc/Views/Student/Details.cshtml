@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+@* 
+<script src="~/lib/jquery/jquery.min.js"></script> *@
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        Details();
+    });
+
+    function EditClick(studentid) {
+
+    }
+
+    function DeleteClick(studentid) {
+
+    }
+
+    function Details() {
+        debugger;
+        $.ajax({
+            async: true,
+            url: '/Student/GETData',
+            type: 'GET',
+            dataType: 'json', 
+
+            success: function (data) {
+                console.log("click");
+                console.log(data);
+
+                $('#Datatable tbody').empty();
+
+                $.each(data, function (index, item) {
+                    $('#Datatable tbody').append(
+                        '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.gender + '</td><td>' + item.age + '</td><td><input type="button" value="Edit" onclick="EditClick(\'' + item.id + '\')"/></td><td><input type="button" value="Delete" onclick="DeleteClick(\'' + item.id + '\')"/></td></tr>');
+
+                    
+                });
+            },
+            
+            error: function () {
+                alert('There is a problem displaying data');
+            }
+        });
+    }
+</script>
+<h1>Student Details</h1>
+
+<button type="button" class="btn btn-primary" id="CreateStudent"> Create Student</button>
+
+
+<br/>
+<br />
+<table id="Datatable" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <td>
+            id
+        </td>
+        <td> 
+            Name
+        </td>
+        <td>
+            Gender
+        </td>
+        <td>
+         Age
+         </td>
+            <td>
+                Edit
+            </td>
+            <td>
+                Delete
+            </td>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+           
+
+        </tbody>
+    </table>
+
+
+
+
+

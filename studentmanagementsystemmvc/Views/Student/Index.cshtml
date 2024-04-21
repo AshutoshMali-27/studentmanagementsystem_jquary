@@ -1,16 +1,45 @@
-﻿
-@{
-    ViewData["Index"] = "index page";
+﻿@{
+    ViewBag.Title = "Index";
 }
 
+@model ClsStudent
 
-<script src="~/lib/jquery/dist/jquery-3.4.1.min.js"></script>
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSave").click(function (event) {
+            event.preventDefault();
+            var student = {
+                Name: $("#txtname").val(),
+                Gender: $("#txtgender").val(),
+                Age: $("#txtage").val(),
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/Student/Index', // Make sure the URL is correct
+                data: JSON.stringify(student),
+                contentType: 'application/json; charset=utf-8', // Correct the contentType
+                success: function (response) {
+                    alert(response.successMessage);
+                },
+                error: function (response) {
+                    alert('There is some problem adding data');
+                }
+            });
+        });
+    });
+
+</script>
+
 
 
 <h1> Create </h1>
 
 Name:
-<input type="text" id="txtcode" class="form-control" />
+<input type="text" id="txtname" class="form-control" />
 Gender:
 <input type="text" id="txtgender" class="form-control" />
 Age:
@@ -22,37 +51,6 @@ Age:
 
 
 
-<script type="text/javascript">
 
-    $(document).ready(function () {
-
-        $(function () {
-            debugger;
-            $('#btnsave').click(function (event) {
-                debugger;
-                event.preventDefault();
-                var Student = {
-                    Name: $('#txtcode').val(),
-                    Gender: $('#txtgender').val(),
-                    Age: $('#txtage').val()
-                }
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/Student/Index',
-                    data: JSON.stringify(Student),
-                    contentType: 'application/json;charset-utf-8',
-                    success: function (response) {
-                        alert('SuccessFully Added');
-                    },
-                    error: function (response) {
-                        alert('there is some proble to add data');
-                    }
-                })
-            });
-        })
-    })
-
-</script>
 
 
