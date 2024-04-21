@@ -2,21 +2,106 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@* @model studentmanagementsystemmvc.Models.ClsStudent *@
+
+
+@model int
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        debugger;
+        var studentId = $('#studentId').val();
+        LoadDetail(studentId);
+
+
+        $('#btnupdate').click(function (event) {
+            debugger;
+            event.preventDefault();
+            var studentId = $('#studentId').val();
+            var student = {
+                id: $("#lblid").val(),
+                Name: $("#lblName").val(),
+                Gender: $("#lblGender").val(),
+                Age: $("#lblAge").val(),
+            };
+         
+            $.ajax({
+                async: true,
+                url: '/Student/UpdateID/' + studentId,
+                type: 'POST',
+                data: JSON.stringify(student),
+                contentType: 'application/json; charset=utf-8', // Correct the contentType
+                success: function (response) {
+                    alert(response.successMessage);
+                },
+                error: function (response) {
+                    alert('There is some problem adding data');
+                }
+            });
+           // UpdateDetail(studentId);
+        });
+    });
+
+
+
+    // function UpdateDetail(studentId) { 
+        
+    
+    
+    // }
+
+
+
+    function LoadDetail(studentId) {
+        debugger;
+        $.ajax({
+            async: true,
+            url: '/Student/GetDatabyid/' + studentId,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $('#lblid').val(data.id);
+                $('#lblName').val(data.name);
+                $('#lblGender').val(data.gender);
+                $('#lblAge').val(data.age);
+
+            },
+            error: function () {
+                alert('There is a problem displaying data');
+            }
+        });
+    }
+
+</script>
 
 <h1>Edit</h1>
 
 <div class="row">
     <div class="col-md-4">
+
+        <input type="hidden" id="studentId" value="@Model" />
         id:
-        <label id="lblid" class="control-label"></label>
+        <input id="lblid" class="form-control"></input>
+        <p>Edit Student ID: @Model</p>
         <br />
         Name:
-        <label id="lblName" class="control-label"></label>
+        <input id="lblName" class="form-control"></input>
         <br />
         Gender:
-        <label id="lblGender" class="control-label"></label>
+        <input id="lblGender" class="form-control"></input>
         <br />
         Age:
-        <label id="lblAge" class="control-label"></label>
+        <input id="lblAge" class="form-control"></input>
        </div>
        </div>
+
+       <div class="row">
+    <div class="col-md-2">
+
+        <input type="button" id="btnupdate" value="update"  />
+    </div>
+       </div>
+      

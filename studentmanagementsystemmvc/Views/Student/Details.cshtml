@@ -10,15 +10,26 @@
     $(document).ready(function () {
         debugger;
         Details();
+
+
+
     });
 
     function EditClick(studentid) {
+        debugger;
 
+        window.location.href = "Edit?id=" + studentid;
     }
 
     function DeleteClick(studentid) {
-
+        window.location.href = "Delete?id=" + studentid;
     }
+
+    function createstudent() {
+        window.location.href = "Index";
+    }
+
+
 
     function Details() {
         debugger;
@@ -50,7 +61,7 @@
 </script>
 <h1>Student Details</h1>
 
-<button type="button" class="btn btn-primary" id="CreateStudent"> Create Student</button>
+<button type="button" class="btn btn-primary" id="CreateStudent" onclick="createstudent()"> Create Student</button>
 
 
 <br/>
