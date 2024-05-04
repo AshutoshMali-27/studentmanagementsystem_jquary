@@ -40,16 +40,29 @@
             dataType: 'json', 
 
             success: function (data) {
+
                 console.log("click");
                 console.log(data);
 
                 $('#Datatable tbody').empty();
 
                 $.each(data, function (index, item) {
+                    var binditem = '';
                     $('#Datatable tbody').append(
-                        '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.gender + '</td><td>' + item.age + '</td><td><input type="button" value="Edit" onclick="EditClick(\'' + item.id + '\')"/></td><td><input type="button" value="Delete" onclick="DeleteClick(\'' + item.id + '\')"/></td></tr>');
+                        // '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.gender + '</td><td>' + item.age + '</td><td><input type="button" value="Edit" onclick="EditClick(\'' + item.id + '\')"/></td><td><input type="button" value="Delete" onclick="DeleteClick(\'' + item.id + '\')"/></td></tr>');
 
-                    
+
+                        '<tr><tr><td>id</td><td>' + item.id + '</td></tr><tr><td>name</td><td>' + item.name + '</td></tr><tr><td>Gender</td><td>' + item.gender + '</td></tr><tr><td>Age</td><td>' + item.age + '</td></tr></tr><td colspan="2"><table id="table1" >'+binditem+'</table></td><tr></tr>');
+
+
+                    // $('#table1 ').append(
+                    binditem = ' < tr > <td>' + item.id + ' < /td><td>' + item.name + '</td > <td>' + item.gender + ' < /td><td>' + item.age + '</td > <td><input type="button" value = "Edit" onclick = "EditClick(\'' + item.id + '\')" /> </td><td><input type="button" value="Delete" onclick="DeleteClick(\'' + item.id + '\')"/ > </td></tr > ';
+
+                    $.each(data, function (index, item) {
+
+                        $('#table1 thead').append('<tr> <td> Test < /td> <td> Test < /td> <td> Test < /td></tr>');
+                    });
+                 
                 });
             },
             
@@ -67,33 +80,15 @@
 <br/>
 <br />
 <table id="Datatable" class="table table-bordered table-hover">
-    <thead>
-    <tr>
-        <td>
-            id
-        </td>
-        <td> 
-            Name
-        </td>
-        <td>
-            Gender
-        </td>
-        <td>
-         Age
-         </td>
-            <td>
-                Edit
-            </td>
-            <td>
-                Delete
-            </td>
-        </tr>
-        </thead>
-        <tbody class="tbody">
-           
+<tr>
 
-        </tbody>
+</tr>
+<tr>
+
+</tr>
     </table>
+
+
 
 
 
