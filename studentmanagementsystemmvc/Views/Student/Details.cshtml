@@ -4,14 +4,36 @@
 }
 @* 
 <script src="~/lib/jquery/jquery.min.js"></script> *@
+<style type="text/css">
 
-<script src="~/lib/jquery/jquery.min.js"></script>
+
+@@media print {
+    /* Minimize page margins */
+    body {
+        margin: 0;
+    }
+
+    /* Adjust scaling */
+    .content {
+        transform: scale(0.8); /* Adjust as needed */
+        transform-origin: top left;
+    }
+}
+
+</style>
+@* <script src="~/lib/jquery/jquery.min.js"></script> *@
+<link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" defer ></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         debugger;
         Details();
 
+      //  datatable2();
 
+    
 
     });
 
@@ -45,25 +67,114 @@
                 console.log(data);
 
                 $('#Datatable tbody').empty();
+               
+
+                // $.each(data, function (index, item) {
+                //     debugger;
+                //     var binditem = '';
+                //    // binditem = ;
+
+                //    // $('#table1 tbody').append('<tr><td></td></tr>');
+                //     $('#Datatable tbody').append(
+                //         // '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.gender + '</td><td>' + item.age + '</td><td><input type="button" value="Edit" onclick="EditClick(\'' + item.id + '\')"/></td><td><input type="button" value="Delete" onclick="DeleteClick(\'' + item.id + '\')"/></td></tr>');
+
+                //         //'<tr><tr><td>id</td><td>' + item.id + '</td></tr><tr><td>name</td><td>' + item.name + '</td></tr><tr><td>Gender</td><td>' + item.gender + '</td></tr><tr><td>Age</td><td>' + item.age + '</td></tr></tr>' 
+
+                //         '<tr><tr><td>id</td><td>' + item.id + '</td></tr><tr><td>name</td><td>' + item.name + '</td></tr><tr><td>Gender</td><td>' + item.gender + '</td></tr><tr><td>Age</td><td>' + item.age + '</td></tr></tr><tr><td colspan="2"><table><tr><td></td></tr></table></td></tr>');
+                //         console.log();
+
+
+
+           
+                //    // <tr><td colspan="2" > <table id="table1" > ' + binditem + ' < /table></td > </tr>
+                 
+                //     // $('#table1 ').append(
+                //  //   binditem = ' < tr > <td>' + item.id + ' < /td><td>' + item.name + '</td > <td>' + item.gender + ' < /td><td>' + item.age + '</td > <td><input type="button" value = "Edit" onclick = "EditClick(\'' + item.id + '\')" /> </td><td><input type="button" value="Delete" onclick="DeleteClick(\'' + item.id + '\')"/ > </td></tr > ';
+
+                    
+                 
+                // });
 
                 $.each(data, function (index, item) {
-                    var binditem = '';
-                    $('#Datatable tbody').append(
-                        // '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.gender + '</td><td>' + item.age + '</td><td><input type="button" value="Edit" onclick="EditClick(\'' + item.id + '\')"/></td><td><input type="button" value="Delete" onclick="DeleteClick(\'' + item.id + '\')"/></td></tr>');
+                    debugger;
+                    var mainTableRow =
+                        '<tr>' +
+                        '<tr>' +
+                        '<td>id</td><td>' + item.id + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>name</td><td>' + item.name + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Gender</td><td>' + item.gender + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Age</td><td>' + item.age + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>id</td><td>' + item.id + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>name</td><td>' + item.name + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>gender</td><td>' + item.gender + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>Age</td><td>' + item.age + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>id</td><td>' + item.id + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>name</td><td>' + item.name + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td>gender</td><td>' + item.gender + '</td>' +
+                        '</tr>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td colspan="2">' +
+                        '<table id="datatable2_' + index + '" class="content table table-bordered table-hover">' + // Unique ID for each nested table +
+                        '<thead>' +
+                        '<tr>' +
+                        '<td>id</td>' +
+                        '<td>name</td>' +
+                        '<td>gender</td>' +
+                        '<td>age</td>' +
+                        '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                        '<tr>' +
+                        '<td>' + item.id + '</td>' +
+                        '<td>' + item.name + '</td>' +
+                        '<td>' + item.gender + '</td>' +
+                        '<td>' + item.age + '</td>' +
+                        '</tr>' +
+                        '</tbody>' +
+                        '</table>' +
+                        '</td>' +
+                        '< /tr>';
 
 
-                        '<tr><tr><td>id</td><td>' + item.id + '</td></tr><tr><td>name</td><td>' + item.name + '</td></tr><tr><td>Gender</td><td>' + item.gender + '</td></tr><tr><td>Age</td><td>' + item.age + '</td></tr></tr><td colspan="2"><table id="table1" >'+binditem+'</table></td><tr></tr>');
+                    $('#Datatable').append(mainTableRow);
 
-
-                    // $('#table1 ').append(
-                    binditem = ' < tr > <td>' + item.id + ' < /td><td>' + item.name + '</td > <td>' + item.gender + ' < /td><td>' + item.age + '</td > <td><input type="button" value = "Edit" onclick = "EditClick(\'' + item.id + '\')" /> </td><td><input type="button" value="Delete" onclick="DeleteClick(\'' + item.id + '\')"/ > </td></tr > ';
-
-                    $.each(data, function (index, item) {
-
-                        $('#table1 thead').append('<tr> <td> Test < /td> <td> Test < /td> <td> Test < /td></tr>');
+                    // Initialize DataTable for the nested table
+                    $('#datatable2_' + index).DataTable({
+                        "columns": [ // Use "columns" instead of "column"
+                            { "data": "id" },
+                            { "data": "name" },
+                            { "data": "gender" },
+                            { "data": "age" }
+                        ]
                     });
-                 
+              
+
+
+               
+
                 });
+
             },
             
             error: function () {
@@ -72,24 +183,89 @@
         });
     }
 </script>
-<h1>Student Details</h1>
 
-<button type="button" class="btn btn-primary" id="CreateStudent" onclick="createstudent()"> Create Student</button>
+<script>
 
 
-<br/>
-<br />
-<table id="Datatable" class="table table-bordered table-hover">
-<tr>
+    window.onload = function () {
+        // Calculate scaling factor based on content and page size
+        adjustScaling();
+    };
 
-</tr>
-<tr>
+    function adjustScaling() {
+        // Get the content and page dimensions
+        var content = document.querySelector('.content');
+        var contentWidth = content.offsetWidth;
+        var contentHeight = content.offsetHeight;
 
-</tr>
+        // Assuming A4 page size, adjust as needed
+        var pageWidth = 210; // in mm
+        var pageHeight = 297; // in mm
+
+        // Calculate scaling factors
+        var scaleX = pageWidth / contentWidth;
+        var scaleY = pageHeight / contentHeight;
+
+        // Apply the scaling
+        var scale = Math.min(scaleX, scaleY);
+        content.style.transform = 'scale(' + scale + ')';
+        content.style.transformOrigin = 'top left';
+    }
+
+</script>
+
+
+<div style="    position: relative;
+    right: 14%;">
+
+    <h1>Student Details</h1>
+
+    <button type="button" class="btn btn-primary" id="CreateStudent" onclick="createstudent()"> Create Student</button>
+
+
+    <br />
+    <br />
+    <table id="Datatable" class="table table-bordered table-hover">
+
+        <tr>
+        </tr>
     </table>
 
+</div>
+<
 
 
+@* <script>
+
+
+    $.each(data, function (index, item) {
+        debugger;
+        var mainTableRow =
+            '<tr><tr><td>id</td><td>' + item.id + '</td></tr><tr><td>name</td><td>' + item.name + '</td></tr><tr><td>Gender</td><td>' + item.gender + '</td></tr><tr><td>Age</td><td>' + item.age + '</td></tr><tr><td>id</td><td>' + item.id + '</td></tr><tr><td>name</td><td>' + item.name + '</td></tr><tr><td>gender</td><td>' + item.gender + '</td></tr><tr><td>Age</td><td>' + item.age + '</td></tr>' +
+            '<tr><td>id</td><td>' + item.id + '</td></tr><tr><td>name</td><td>' + item.name + '</td></tr><tr><td>gender</td><td>' + item.gender + '</td></tr></tr><tr><td colspan="2"><table id="datatable2_' + index + '" class="content table table-bordered table-hover"><thead><tr><td>id</td><td>name</td><td>gender</td><td>age</td></tr></thead><tbody><tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.gender + '</td><td>' + item.age + '</td>' +
+            '</tr></tbody></table></td>< /tr>';
+
+
+        $('#Datatable').append(mainTableRow);
+
+        // Initialize DataTable for the nested table
+        $('#datatable2_' + index).DataTable({
+            "columns": [ // Use "columns" instead of "column"
+                { "data": "id" },
+                { "data": "name" },
+                { "data": "gender" },
+                { "data": "age" }
+            ]
+        });
+
+
+
+
+
+    });
+</script> *@
+
+             
 
 
 
